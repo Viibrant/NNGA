@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# HACKY I KNOW BUT SCREW YOU
+*.synctex.gz
+*.aux
