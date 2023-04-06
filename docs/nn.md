@@ -10,21 +10,30 @@ In recent years, optimizations techniques have gained significant attention due 
 
 ## 2.1 Introduction To Problem 
 
-The ability to automatically classify plants based on their physical attributes would massively benefit agricultural research. Manual identification of plant types can be a tedious task, especially when dealing with large datasets. Machine learning techniques, specifically neural networks, have been successful in automating classification processes.
-
-A popular dataset used for classification problems is the Iris dataset. The iris dataset contains measurements of 150 flowers, all categorised via 4 attributes: sepal length, sepal width, petal length and petal width. Using these attributes we can classify the flowers into three different species: Iris Setosa, Iris Versicolor and Iris Virginica.
+A classical dataset used for classification problems is the Iris dataset. The iris dataset contains measurements of 150 flowers, all categorised via 4 attributes: sepal length, sepal width, petal length and petal width. Using these attributes we can classify the flowers into three different species: Iris Setosa, Iris Versicolor and Iris Virginica.
 
 Sepals and petals are virtual features that are ideal to identify species of iris flowers. Sepals are the outer casing of the flower in early development. Petals, on the other hand, are the bright outer parts of the flower used to attract pollinators. The lengths and widths of these structures vary between the species of iris flowers, making them ideal for classification.
 
-Within this section of this report we will use the iris dataset to build a neural network that can accurately classify each sample based in its attribute measurements. Doing so will require analysis and processing the iris dataset along with designing, building and training a neural network.
-
+Within this section of this report we will use the iris dataset to build a neural network that can accurately classify each sample based in its attribute measurements. Doinß g so will require analysis and processing the iris dataset along with designing, building and training a neural network.
 ## 2.2.1 Analysis Of Iris Data Set
 
-
+* Compare differences in flower types via analysing the differences in attributes. 
+- Class imbalances.
+- Skiwed distributions.
+- Missing values.
 
 ## 2.2.2 Data Preprocessing
 
+-  Data Cleaning: Remove any missing data or duplicates in the dataset.
+-  Data Normalisation: Normalise the data to ensure that all attributes have the same scale.
+-   Data Standardization: Standardise the data to ensure that all attributes have a mean of zero and standard deviation of one.
+-   Feature Selection: Identify the most important features for classification and remove any redundant or irrelevant features.
+-   Data Visualization: Visualise the data to gain insights into the distribution and correlation between different features.
+-   Data Splitting: Split the dataset into training, validation, and testing sets to evaluate the performance of the neural network.
+
 ## 2.3.1 Neural Network 
+
+- Determine training/validation/testing split.
 
 ## 2.3.2 Design
 
@@ -32,11 +41,8 @@ Within this section of this report we will use the iris dataset to build a neura
 
 ## 2.3.4 Analysis
 
+- 
+
 ## 2.4 Conclusion
 
-
-
-===  ----> 
-
-<= ~~>
-<====>
+- Conclude the report and include further study.
