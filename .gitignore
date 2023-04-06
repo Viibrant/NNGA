@@ -132,4 +132,4 @@ dmypy.json
 *.synctex.gz
 *.aux
 
-writeup.pdf
+docs/writeup.pdf
