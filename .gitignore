@@ -131,3 +131,5 @@ dmypy.json
 # HACKY I KNOW BUT SCREW YOU
 *.synctex.gz
 *.aux
+
+writeup.pdf
