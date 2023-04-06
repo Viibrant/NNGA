@@ -20,6 +20,8 @@ Within this section of this report we will use the iris dataset to build a neura
 
 ## 2.2.1 Analysis Of Iris Data Set
 
+
+
 ## 2.2.2 Data Preprocessing
 
 ## 2.3.1 Neural Network 
