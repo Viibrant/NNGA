@@ -10,6 +10,8 @@ In recent years, optimizations techniques have gained significant attention due 
 
 ## 2.1 Introduction To Problem 
 
+The ability to automaticaly classify plants based on thier physical atributes would massivley benifit agricultural research. Manual identification of plant tyoes can be a tedious task, esspecially when dealing with large datasets. Machine learning techniques 
+
 ## 2.2.1 Analysis Of Iris Data Set
 
 ## 2.2.2 Data Preprocessing
