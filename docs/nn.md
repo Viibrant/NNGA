@@ -10,7 +10,13 @@ In recent years, optimizations techniques have gained significant attention due 
 
 ## 2.1 Introduction To Problem 
 
-The ability to automaticaly classify plants based on thier physical atributes would massivley benifit agricultural research. Manual identification of plant tyoes can be a tedious task, esspecially when dealing with large datasets. Machine learning techniques 
+The ability to automatically classify plants based on their physical attributes would massively benefit agricultural research. Manual identification of plant types can be a tedious task, especially when dealing with large datasets. Machine learning techniques, specifically neural networks, have been successful in automating classification processes.
+
+A popular dataset used for classification problems is the Iris dataset. The iris dataset contains measurements of 150 flowers, all categorised via 4 attributes: sepal length, sepal width, petal length and petal width. Using these attributes we can classify the flowers into three different species: Iris Setosa, Iris Versicolor and Iris Virginica.
+
+Sepals and petals are virtual features that are ideal to identify species of iris flowers. Sepals are the outer casing of the flower in early development. Petals, on the other hand, are the bright outer parts of the flower used to attract pollinators. The lengths and widths of these structures vary between the species of iris flowers, making them ideal for classification.
+
+Within this section of this report we will use the iris dataset to build a neural network that can accurately classify each sample based in its attribute measurements. Doing so will require analysis and processing the iris dataset along with designing, building and training a neural network.
 
 ## 2.2.1 Analysis Of Iris Data Set
 

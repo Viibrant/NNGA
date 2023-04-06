@@ -4,39 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "c19f69970ad40299",
+        "id": "1a814a66a25a507d",
         "type": "tabs",
-        "dimension": 62.31751824817518,
         "children": [
           {
-            "id": "8b779af5503dbc93",
+            "id": "0d0c0e5f41c096ec",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "nn.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "252c09c5b18634d7",
-        "type": "tabs",
-        "dimension": 37.68248175182482,
-        "children": [
-          {
-            "id": "6a3c33960a26cc20",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "nn.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -89,7 +65,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 260.5,
+    "collapsed": true
   },
   "right": {
     "id": "81a4c48bf536bd4f",
@@ -105,7 +82,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "nn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +98,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "nn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -144,9 +119,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "nn.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -166,8 +139,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8b779af5503dbc93",
+  "active": "0d0c0e5f41c096ec",
   "lastOpenFiles": [
+    "nn.md",
     "ga.md"
   ]
 }
