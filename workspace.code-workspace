@@ -21,7 +21,7 @@
         "latex-workshop.view.pdf.viewer": "tab",
         "latex-workshop.intellisense.package.enabled": true,
         "latex-workshop.latex.clean.subfolder.enabled": true,
-        "latex-workshop.latex.autoClean.run": "onFailed",
+        // "latex-workshop.latex.autoClean.run": "onFailed",
         "latex-workshop.latex.autoBuild.run": "onSave",
         "latex-workshop.latex.external.build.args": [
             "--shell-escape"
@@ -50,7 +50,7 @@
             "**/*.vscode": true,
             "**/*.github": true,
             "**/*.user": true,
-            "**/*.log": true,
+            // "**/*.log": true,
             "**/*.ilk": true,
             "**/*.bst": true,
             "**/.dockerignore": true,
@@ -64,7 +64,7 @@
                     "-interaction=nonstopmode",
                     "-file-line-error",
                     "-pdf",
-                    "-outdir=%OUTDIR%",
+                    // "-outdir=%OUTDIR%",
                     "%DOC%"
                 ],
                 "env": {}
@@ -96,14 +96,6 @@
                 "env": {}
             },
             {
-                "name": "latexmk_rconly",
-                "command": "latexmk",
-                "args": [
-                    "%DOC%"
-                ],
-                "env": {}
-            },
-            {
                 "name": "pdflatex",
                 "command": "pdflatex",
                 "args": [
@@ -118,77 +110,33 @@
                 "name": "bibtex",
                 "command": "bibtex",
                 "args": [
-                    "%DOCFILE%"
+                    "%DOCFILE%",
                 ],
                 "env": {}
             },
+
+        ],
+        "latex-workshop.latex.recipes": [
             {
-                "name": "rnw2tex",
-                "command": "Rscript",
-                "args": [
-                    "-e",
-                    "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
-                ],
-                "env": {}
-            },
-            {
-                "name": "jnw2tex",
-                "command": "julia",
-                "args": [
-                    "-e",
-                    "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
-                ],
-                "env": {}
-            },
-            {
-                "name": "jnw2texminted",
-                "command": "julia",
-                "args": [
-                    "-e",
-                    "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
-                ],
-                "env": {}
-            },
-            {
-                "name": "pnw2tex",
-                "command": "pweave",
-                "args": [
-                    "-f",
-                    "tex",
-                    "%DOC_EXT%"
-                ],
-                "env": {}
-            },
-            {
-                "name": "pnw2texminted",
-                "command": "pweave",
-                "args": [
-                    "-f",
-                    "texminted",
-                    "%DOC_EXT%"
-                ],
-                "env": {}
-            },
-            {
-                "name": "tectonic",
-                "command": "tectonic",
-                "args": [
-                    "--synctex",
-                    "--keep-logs",
-                    "%DOC%.tex"
-                ],
-                "env": {}
-            },
+                "name": "pdflatex -> bibtex -> pdflatex*2",
+                "tools": [
+                    "pdflatex",
+                    "bibtex",
+                    "pdflatex",
+                    "pdflatex"
+                ]
+            }
         ]
     },
-    "latex-workshop.latex.recipes": [
-        {
-            "name": "pdflatex × 3",
-            "tools": [
-                "pdflatex",
-#                "pdflatex",
-                "pdflatex"
-            ]
-        },
-    ],
+//     "latex-workshop.latex.recipes": [
+//         {
+//             "name": "pdflatex × 3",
+//             "tools": [
+//                 "pdflatex",
+// #                "pdflatex",
+//                 "pdflatex"
+//             ]
+//         },
+//     ],
+
 }
