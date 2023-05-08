@@ -1,0 +1,194 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        // "editor.insertSpaces": true,
+        // "editor.smoothScrolling": true,
+        // "editor.wordWrap": "on",
+        // "editor.fontLigatures": true,
+        // "editor.renderWhitespace": "boundary",
+        // "editor.formatOnPaste": false,
+        // "editor.formatOnSave": false,
+        // "editor.minimap.enabled": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.defaultFormatter": "James-Yu.latex-workshop",
+        "files.trimTrailingWhitespace": true,
+        "latex-workshop.synctex.afterBuild.enabled": true,
+        "latex-workshop.chktex.enabled": true,
+        "latex-workshop.view.pdf.viewer": "tab",
+        "latex-workshop.intellisense.package.enabled": true,
+        "latex-workshop.latex.clean.subfolder.enabled": true,
+        "latex-workshop.latex.autoClean.run": "onFailed",
+        "latex-workshop.latex.autoBuild.run": "onSave",
+        "latex-workshop.latex.external.build.args": [
+            "--shell-escape"
+        ],
+        "latex-workshop.texdoc.args": [
+            "--view",
+            "--shell-escape"
+        ],
+        "files.exclude": {
+            "**/.project": true,
+            "**/.settings": true,
+            "**/*.aux": true,
+            "**/*.out": true,
+            "**/*.fls": true,
+            "**/*.iml": true,
+            "**/*.toc": true,
+            "**/*.gz": true,
+            "**/*.bbl": true,
+            "**/*.lof": true,
+            "**/*.blg": true,
+            "**/*.lot": true,
+            "**/*.fdb_latexmk": true,
+            "**/*.synctex(busy)": true,
+            "**/*.git": true,
+            "**/*.idea": true,
+            "**/*.vscode": true,
+            "**/*.github": true,
+            "**/*.user": true,
+            "**/*.log": true,
+            "**/*.ilk": true,
+            "**/*.bst": true,
+            "**/.dockerignore": true,
+        },
+        "latex-workshop.latex.tools": [
+            {
+                "name": "latexmk",
+                "command": "latexmk",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "-pdf",
+                    "-outdir=%OUTDIR%",
+                    "%DOC%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "lualatexmk",
+                "command": "latexmk",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "-lualatex",
+                    "-outdir=%OUTDIR%",
+                    "%DOC%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "xelatexmk",
+                "command": "latexmk",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "-xelatex",
+                    "-outdir=%OUTDIR%",
+                    "%DOC%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "latexmk_rconly",
+                "command": "latexmk",
+                "args": [
+                    "%DOC%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "pdflatex",
+                "command": "pdflatex",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "%DOC%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "bibtex",
+                "command": "bibtex",
+                "args": [
+                    "%DOCFILE%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "rnw2tex",
+                "command": "Rscript",
+                "args": [
+                    "-e",
+                    "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+                ],
+                "env": {}
+            },
+            {
+                "name": "jnw2tex",
+                "command": "julia",
+                "args": [
+                    "-e",
+                    "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+                ],
+                "env": {}
+            },
+            {
+                "name": "jnw2texminted",
+                "command": "julia",
+                "args": [
+                    "-e",
+                    "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+                ],
+                "env": {}
+            },
+            {
+                "name": "pnw2tex",
+                "command": "pweave",
+                "args": [
+                    "-f",
+                    "tex",
+                    "%DOC_EXT%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "pnw2texminted",
+                "command": "pweave",
+                "args": [
+                    "-f",
+                    "texminted",
+                    "%DOC_EXT%"
+                ],
+                "env": {}
+            },
+            {
+                "name": "tectonic",
+                "command": "tectonic",
+                "args": [
+                    "--synctex",
+                    "--keep-logs",
+                    "%DOC%.tex"
+                ],
+                "env": {}
+            },
+        ]
+    },
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex × 3",
+            "tools": [
+                "pdflatex",
+#                "pdflatex",
+                "pdflatex"
+            ]
+        },
+    ],
+}
