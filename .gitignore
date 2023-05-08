@@ -132,7 +132,7 @@ dmypy.json
 *.synctex.gz
 *.aux
 
-docs/writeup.pdf
+docs/document.pdf
 
 # LaTeX compile stuff
 *.fdb_latexmk
