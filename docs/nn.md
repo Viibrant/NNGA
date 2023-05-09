@@ -12,7 +12,7 @@ and evaluation. Our goal is to provide insights and pave the way for future rese
 
 ### Data Analysis
 
-Before the ANN's architecture can be theorised, we first must perform a comprehensive data analysis of the Iris dataset using various visualization techniques. This allowed us to gain a deeper understanding of the relationships between the attributes and the distribution of the different Iris species.
+Before the ANN's architecture can be theorised, we first must perform a comprehensive data analysis of the Iris dataset using various visualization techniques. This will allow us to gain a deeper understanding of the relationships between the attributes and the distribution of the different Iris species.
 
 1. **Boxplot**: We created a boxplot to visualize the distribution of each attribute (sepal length, sepal width, petal length, and petal width) across the three Iris species. This plot helped us identify any potential outliers and examine the overall spread of the data.
 
@@ -62,6 +62,8 @@ for training a reliable and accurate neural network .
 - Optional: Dimensionality reduction techniques
 
 ## 4. Splitting the Dataset
+
+Data was split into training and testing data in an 80/20 split. 
 
 - Split-sample training (train, validation, and test sets)
 - K-fold cross-validation
