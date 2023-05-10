@@ -99,8 +99,20 @@ By applying these transformations to the iris datasey, we can effectively prepro
 network to learn the underlying patterns and relationships more efficiently. This, in turn, will lead to more accurate and
 reliable classification results.
 \subsection{Neural Network Design}
-
 \subsubsection{Topology and Architecture}
+
+The input layer comprises of four nodes, corresponding to the four distinct attributes of the Iris dataset: sepal length, sepal width,
+petal length, and petal width. Following the input layer, we have five hidden layers, four containing eight nodes and one with four nodes.
+The output layer consists of three nodes, representing the three Iris species we aim to classify: Iris Setosa, Iris Versicolour, and Iris Virginica.
+
+This architecture was selected due to its potential for intricate pattern detection. By increasing the number of hidden layers and nodes within each
+layer, the network can learn more complex representations of the data, thereby improving its ability to make accurate classifications. However, it's
+important to note that adding more layers and nodes also increases the risk of overfitting. Thus, careful monitoring during training and validation
+is necessary to prevent the model from memorizing the training data too closely and failing to generalize well to unseen data.
+
+To facilitate learning within our network, we've chosen to use the Gaussian Error Linear Unit (GELU) as our activation function. GELU has a higher
+threshold for activation, meaning that it requires stronger evidence before firing a neuron. This property can help our network learn more meaningful,
+sparser representations of the data, which can be beneficial for the classification task at hand.
 
 \subsubsection{Training Algorithm (Backpropagation)}
 
