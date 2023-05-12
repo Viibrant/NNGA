@@ -28,22 +28,30 @@ bestModel = [];
 bestOptions = [];
 bestInfo = [];
 
-% Define grid search parameters
-learningRates = [0.01, 0.1, 0.25];
-dropoutRates = [0.1, 0.2, 0.3];
-activationFns = {@reluLayer, @tanhLayer};
+worstPerformance = -Inf;
+worstModel = [];
+worstOptions = [];
+worstInfo = [];
+worstHyper = [];
 
-options = trainingOptions('sgdm', ...
-    'MaxEpochs',500, ...ana
-    'InitialLearnRate',0.25, ...
-    'Shuffle','every-epoch', ...
-    'ValidationData',{x_val, y_val}, ...
-    'ValidationFrequency',30, ...
-    'Verbose',false, ...
-    'Plots','training-progress');
+% Define grid search parameters
+learningRates = [0.1, 0.25];
+dropoutRates = [0.2, 0.5];
+% activationFns = {@reluLayer, @tanhLayer};
+
 
 for lr = learningRates
     for dr = dropoutRates
+        options = trainingOptions('sgdm', ...
+            'MaxEpochs', 250, ...ana
+            'InitialLearnRate',lr, ...
+            'Shuffle','every-epoch', ...
+            'ValidationData',{x_val, y_val}, ...
+            'ValidationFrequency',30, ...
+            'Verbose',false, ...
+            'Plots','training-progress' ...
+         );
+
         layers = [ ...
             featureInputLayer(4)
 
@@ -126,43 +134,26 @@ for lr = learningRates
                 bestModel = model;
                 bestOptions = options;
                 bestInfo = info;
+                bestHyper = {dr, lr};
+            end
+           
+            if info.FinalValidationLoss > worstPerformance
+                worstPerformance = info.FinalValidationLoss;
+                worstModel = model;
+                worstOptions = options;
+                worstInfo = info;
+                worstHyper = {dr, lr};
             end
         end
     end
 end
 
 % Display the best performance
-disp(['Best performance: ', num2str(bestPerformance)])
+disp(['Best performance: ', num2str(bestPerformance), "Hyperparameters : ", bestHyper]);
+disp(['Worst performance: ', num2str(worstPerformance), "Hyperparameters : ", worstHyper]);
 
-%% train classifier
-
-netAry = {numFolds,1};
-infoAry = {numFolds, 1};
-perfAry = zeros(numFolds,1);
-
-for i = 1:cvp.NumTestSets
-    idxTrain = training(cvp, i);
-    idxValidation = test(cvp, i);
-
-    inputsTrain = inputs(idxTrain,:);
-    targetsTrain = targets(idxTrain);
-
-    inputsValidation = inputs(idxValidation,:);
-    targetsValidation = targets(idxValidation);
-    
-    options.ValidationData = {inputsValidation, targetsValidation};
-    
-    % Train the network
-    [model, info] = trainNetwork(inputsTrain, targetsTrain, layers, options);
-    netAry{i} = model;
-    infoAry{i} = info;
-    perfAry(i) = info.FinalValidationLoss;
-end
-
-%take the network with min Loss value
-[maxPerf,maxPerfID] = min(perfAry);
-model = netAry{maxPerfID};
-info = infoAry{maxPerfID};
+model = bestModel;
+info = bestInfo;
 
 %% predict labels
 % score store likelihood of each sample
