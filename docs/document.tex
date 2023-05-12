@@ -36,117 +36,108 @@
 \end{IEEEkeywords}
 
 \section{Introduction}
-In recent years, optimisation techniques have gained significant attention due to their wide range of applications in various fields such as machine learning, engineering, and finance. Among these techniques, artificial neural networks (ANNs) and genetic algorithms (GAs) have emerged as powerful tools for solving complex problems. This paper explores the application of ANNs to classify the Iris dataset, a well-known benchmark problem in machine learning, and the use of GAs to optimize the SHUBERT function, a challenging global optimisation problem. By comparing the performance of these two distinct optimisation methods, we aim to provide a deeper understanding of their strengths and weaknesses, as well as their suitability for different types of problems. This paper will cover the design, implementation, evaluation, and comparison of ANNs and GAs in the context of the Iris dataset classification and SHUBERT function optimization.
+
+Optimisation techniques like artificial neural networks (ANNs) and genetic algorithms (GAs) have become prevalent due to their broad applications, including machine learning and finance. This paper applies ANNs for Iris dataset classification and GAs for SHUBERT function optimisation, both complex problems in their respective fields. The comparison of these methods aims to elucidate their strengths, weaknesses, and suitability for different problem types, encompassing their design, implementation, and evaluation.
 
 \section{Part I: Neural Networks for Classification/Mapping Task}
 
 \subsection{Introduction}
 
-The Iris dataset is a classic machine learning classification problem, introduced in 1936 by Ronald A.
-Fisher. This report aims to create an artificial neural network to accurately classify Iris plants into
-three species: Iris Setosa, Iris Versicolour, and Iris Virginica. We tackle the challenge of non-linear
-separability between two species through data preprocessing, neural network design, optimization,validation,
-and evaluation. Our goal is to provide insights and pave the way for future research in this field.
+The Iris dataset is a classic machine learning classification problem. This report aims to create an artificial neural
+network to accurately classify Iris plants into three species: Setosa, Versicolour, and Virginica. We tackle the
+challenge of non-linear separability between two species through data preprocessing, neural network design, optimization, 
+validation, and evaluation. Our goal is to provide insights and pave the way for future research in this field.
 
 \subsection{Data Analysis and Pre-processing}
 
 \subsubsection{Data Analysis}
-Before the ANN's architecture can be theorised, we first must perform a comprehensive data analysis of the
-Iris dataset using various visualization techniques. This will allow us to gain a deeper understanding of the
-relationships between the attributes and the distribution of the different Iris species.
+First, we need to analyze the Iris dataset using visualization techniques, enabling us to understand the relationships between attributes and the distribution of Iris species before theorizing the ANN's architecture.
 
-\begin{itemize}
-  \item \textbf{Boxplot}: We created a boxplot to visualize the distribution of each attribute (sepal length, sepal width,
-  petal length, and petal width) across the three Iris species. This plot helped us identify any potential outliers
-  and examine the overall spread of the data.
-  \item \textbf{Pairplot}: A pairplot was generated to illustrate the relationships between all the possible pairs of attributes.
+\textbf{Boxplot}: We created a boxplot to visualize the distribution of each attribute (sepal length, sepal width,
+  petal length, and petal width).
+
+\textbf{Pairplot}: A pairplot was generated to illustrate the relationships between all the possible pairs of attributes.
   This scatterplot matrix allowed us to observe the linear separability of Iris Setosa and the evident overlap between
   Iris Versicolour and Iris Virginica.
 
-  The pairplot reveals that Iris Versicolour and Iris Virginica exhibit overlapping attributes, suggesting that accurately
-  classifying these two Iris species could present challenges.
-
-  \item \textbf{Correlation Matrix}: We calculated the correlation matrix to quantify the linear relationships between the attributes.
+\textbf{Correlation Matrix}: We calculated the correlation matrix to quantify the linear relationships between the attributes.
   By using a heatmap, we could easily identify strong positive correlations between petal length and petal width, as well as
   between petal length and sepal length.
 
-  \item \textbf{Principal Component Analysis (PCA)}: We performed PCA with three components to reduce the dimensionality of the dataset
+\textbf{Principal Component Analysis (PCA)}: We performed PCA with three components to reduce the dimensionality of the dataset
   and project the data onto a lower-dimensional space. A 3D scatterplot was created to visualize the clustering of the Iris
   species in this reduced space, providing insights into the separability of the classes.
-  
-  The findings demonstrated that Iris Versicolour and Iris Virginica indeed have overlapping attributes. However, upon
-  incorporating an additional dimension, the overlap appeared less severe, indicating that with appropriate data preprocessing,
-  these species could be classified.
-\end{itemize}
 
 \subsubsection{Data Pre-processing}
-During the data processing stage, we perform a series of transformations to ensure that the data is properly prepared
+
+We performed a series of transformations to ensure that the data is properly prepared
 for the neural network training. These transformations include:
-\begin{itemize}
-    \item \textbf{Scaling}: To avoid a scenario where features with larger values dominate the objective function, we scale the data to
-    have zero mean and unit variance. This standardization process helps improve the neural network's training efficiency and
-    overall performance.
+
+\textbf{Scaling}: To avoid a scenario where features with larger values dominate the objective function, we scale the data to
+    have zero mean and unit variance.
     
-    \item \textbf{One-hot encoding}: We convert categorical features into binary features through one-hot encoding. This transformation
+\textbf{One-hot encoding}: We convert categorical features into binary features through one-hot encoding. This transformation
     ensures that the model does not interpret categorical features as ordinal, which could lead to inaccurate classifications.
     
-    \item \textbf{Train-test split}: To evaluate the model's performance on unseen data, we divide the dataset into a training set and a
+\textbf{Train-test split}: To evaluate the model's performance on unseen data, we divide the dataset into a training set and a
     test set. The training set is utilized for training the model, while the test set serves as a benchmark for assessing the
     model's generalization capabilities.
-\end{itemize}
 
 By applying these transformations to the iris datasey, we can effectively preprocess the data, enabling the neural
 network to learn the underlying patterns and relationships more efficiently. This, in turn, will lead to more accurate and
 reliable classification results.
+
 \subsection{Neural Network Design}
+
 \subsubsection{Topology and Architecture}
 
-The input layer comprises of four nodes, corresponding to the four distinct attributes of the Iris dataset: sepal length, sepal width,
-petal length, and petal width. Following the input layer, we have five hidden layers, four containing eight nodes and one with four nodes.
-The output layer consists of three nodes, representing the three Iris species we aim to classify: Iris Setosa, Iris Versicolour, and Iris Virginica.
+Our artificial neural network (ANN) is intricately designed to handle the task at hand. The input layer of our network is composed of four nodes, each corresponding to the four distinct attributes found within the Iris dataset. These attributes are sepal length, sepal width, petal length, and petal width. This layer serves as the gateway, allowing the data to flow into the network for further processing.
 
-This architecture was selected due to its potential for intricate pattern detection. By increasing the number of hidden layers and nodes within each
-layer, the network can learn more complex representations of the data, thereby improving its ability to make accurate classifications. However, it's
-important to note that adding more layers and nodes also increases the risk of overfitting. Thus, careful monitoring during training and validation
-is necessary to prevent the model from memorizing the training data too closely and failing to generalize well to unseen data.
+In a quest to find the optimal network architecture, we conducted multiple experiments. Specifically, we tested three different structures with varying hidden layer sizes and node configurations. These experiments aimed to understand the impact of the number of layers and nodes on the network's performance.
 
-To facilitate learning within our network, we've chosen to use the Gaussian Error Linear Unit (GELU) as our activation function. GELU has a higher
-threshold for activation, meaning that it requires stronger evidence before firing a neuron. This property can help our network learn more meaningful,
-sparser representations of the data, which can be beneficial for the classification task at hand.
+The output layer, the final stage of the network, is made up of three nodes. These nodes represent the three Iris species that our network aims to classify, namely, Iris Setosa, Iris Versicolour, and Iris Virginica.
+
+By increasing the number of hidden layers and nodes within each layer, the network can learn more complex representations of the data. This, in turn, can significantly improve its ability to make accurate classifications. 
+
+To enhance the learning within our network, we opted for the Rectified Linear Unit (RELU) as our activation function. This function is known for its higher threshold for activation, which means that it requires stronger evidence before firing a neuron. This characteristic can aid our network in learning more meaningful and sparser representations of the data, which is especially beneficial for the classification task at hand.
 
 \subsubsection{Training Algorithm (Backpropagation)}
 
 \subsection{Training and Testing}
 
-The training of our deep neural network model was executed using the backpropagation algorithm. Backpropagation is an integral method for optimising
-the weights within the network, serving as a specific implementation of a larger group of algorithms known as gradient descent algorithms. The goal
-of backpropagation is to minimize the error in the output layer by adjusting the weights in the hidden layers.
+TWe trained our deep neural network using the backpropagation algorithm, a key method in optimizing network weights and a gradient descent variant. This algorithm aims to minimize output layer error by adjusting hidden layer weights.
 
-The backpropagation process begins with a forward pass through the network, starting from the input layer and proceeding to the output layer. This
-stage generates an initial prediction using the current network's state. The difference between this prediction and the actual target value is then
-calculated as an error through a loss function.
+Training starts with a forward pass through the network, generating an initial prediction. The difference between this prediction and the actual value is calculated as an error via a loss function. Next, a backward pass computes the error derivative with respect to each weight, quantifying each weight's contribution to total error. Weights are updated to minimize error, and this process repeats until network performance plateaus or overfits.
 
-Subsequently, the algorithm performs a backward pass through the network. During this phase, the derivative of the error with respect to each weight
-is computed. This essentially quantifies how much each weight contributes to the total error. The weights are then updated in a direction that
-minimises the error. This procedure is repeated until the performance of the network plateaus or begins to decline, indicating a state of overfitting.
+We combined backpropagation with the stochastic gradient descent (SGD) optimization algorithm, efficient for large datasets, setting 'MaxEpochs' to 500 and 'InitialLearnRate' to 0.25. This combination was crucial for effective training and achieving performance on the Iris dataset, requiring careful balance of the learning rate and epochs.
 
-In our case, the backpropagation algorithm was utilized in tandem with the stochastic gradient descent (SGD) optimization algorithm, which is renowned
-for its efficiency when handling large datasets. We also introduced a 'MaxEpochs' value of 500 and an 'InitialLearnRate' of 0.25 for the SGD, defining
-the parameters of our training process.
-
-The implementation of the backpropagation training algorithm was instrumental in effectively training our deep neural network model and achieving the
-observed performance on the Iris dataset. Balancing the learning rate and the number of epochs was a critical aspect of ensuring the model's accuracy
-and robustness.ural network could effectively learn from the Iris dataset and perform multi-class classification. Notably, the inclusion of dropout
-layers and batch normalization in the network architecture also contributed to the effective learning of the model, preventing overfitting and ensuring
-the model generalises well to unseen data.
+Our architecture also included dropout layers and batch normalization, which contributed to effective learning, preventing overfitting, and ensuring the model generalized well to unseen data.
 
 \subsubsection{Cross-validation}
+
+To prevent overfitting and ensure our model generaliSes well, we used K-fold cross-validation, a robust statistical technique that assesses the model's performance on an independent dataset. We applied stratified 3-fold cross-validation on the Iris dataset, ensuring each fold represents the whole dataset's class label proportions, beneficial for imbalanced datasets.
+
+This method involves dividing the dataset into 'K' subsets or 'folds', training on K-1 folds and validating on the held-out fold. Repeating this K times, each with a different validation fold, provides a reliable performance estimate on unseen data.
+
+This method leverages the entire dataset for training and validation, advantageous for small datasets like ours. It gives insight into model performance across different data subsets, reducing overfitting likelihood and providing a reliable performance evaluation.
+
+We used MATLAB's cvpartition function for efficient, unbiased data partitioning into training and validation sets, maximizing our data usage for model training while ensuring robust evaluation.
 
 \subsection{Results and Post-Processing}
 
 \section{Part II: Genetic Algorithms for Global Optimization Problem}
 
 \subsection{Function Selection and Analysis}
+
+For the genetic algorithm section of our study, we've selected the Shubert function. This function, often used in optimization challenges, is characterized
+by its complexity, featuring multiple local minima and maxima. This makes it an ideal choice for examining the robustness of genetic algorithms.
+
+The Shubert function tests the algorithm's ability to navigate a landscape filled with local minima to find the global minimum. As the genetic algorithm
+uses mechanisms inspired by natural evolution, it's well-suited for exploring a vast solution space.
+
+Following this introduction, we'll provide details on the genetic algorithm's implementation, our chosen parameters, and the results of applying it to the
+Shubert function, demonstrating its effectiveness in managing complex optimization problems.
+
 \subsection{Genetic Algorithm Design}
 
 \subsubsection{Representation of Initial Population}
