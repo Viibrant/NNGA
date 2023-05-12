@@ -2,6 +2,16 @@
 
 ## NN
 
+### Methodology
+
+- According to ![this](https://arxiv.org/abs/1811.12808), follow these steps:
+  - Split into training, validation, testing - 50%:20%:30%
+  - Perform search for hyperparameters, learning rate and dropout rate
+  - Train for 250 epochs, using K fold cross validation with 3 folds.
+  - Use SGD with momentum of 0.9
+  - Use a batch size of 32
+  - Visualise results using confusion matrix
+
 ### Design
 
 * **Activation function** - Gelu
