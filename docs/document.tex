@@ -31,10 +31,6 @@
     In this paper, we explore two different optimisation problems: a neural network for the Iris dataset and a genetic algorithm for the SHUBERT function. We design, implement, and evaluate both optimisation techniques, comparing their performance and discussing the advantages and disadvantages of each method. The artificial neural network is employed to classify iris flowers based on their morphological features, while the genetic algorithm is utilized to optimize the SHUBERT function, a well-known benchmark problem in the global optimisation domain. By comparing the results of these two distinct optimisation approaches, we provide insights into their applicability and effectiveness in solving different types of problems.
 \end{abstract}
 
-\begin{IEEEkeywords}
-    component, formatting, style, styling, insert
-\end{IEEEkeywords}
-
 \section{Introduction}
 
 Optimisation techniques like artificial neural networks (ANNs) and genetic algorithms (GAs) have become prevalent due to their broad applications, including machine learning and finance. This paper applies ANNs for Iris dataset classification and GAs for SHUBERT function optimisation, both complex problems in their respective fields. The comparison of these methods aims to elucidate their strengths, weaknesses, and suitability for different problem types, encompassing their design, implementation, and evaluation.
@@ -56,17 +52,41 @@ First, we need to analyze the Iris dataset using visualization techniques, enabl
 \textbf{Boxplot}: We created a boxplot to visualize the distribution of each attribute (sepal length, sepal width,
   petal length, and petal width).
 
+  \begin{figure}
+    \includegraphics[width=\linewidth]{figures/boxplot.png}
+    \caption{Boxplot}
+    \label{fig:boat1}
+  \end{figure}
+
 \textbf{Pairplot}: A pairplot was generated to illustrate the relationships between all the possible pairs of attributes.
   This scatterplot matrix allowed us to observe the linear separability of Iris Setosa and the evident overlap between
   Iris Versicolour and Iris Virginica.
+
+  \begin{figure}
+    \includegraphics[width=\linewidth]{figures/pairplot.png}
+    \caption{Pairplot}
+    \label{fig:boat1}
+  \end{figure}
 
 \textbf{Correlation Matrix}: We calculated the correlation matrix to quantify the linear relationships between the attributes.
   By using a heatmap, we could easily identify strong positive correlations between petal length and petal width, as well as
   between petal length and sepal length.
 
+  \begin{figure}
+    \includegraphics[width=\linewidth]{figures/correlationmatrix.png}
+    \caption{Correlation Matrix}
+    \label{fig:boat1}
+  \end{figure}
+
 \textbf{Principal Component Analysis (PCA)}: We performed PCA with three components to reduce the dimensionality of the dataset
   and project the data onto a lower-dimensional space. A 3D scatterplot was created to visualize the clustering of the Iris
   species in this reduced space, providing insights into the separability of the classes.
+
+  \begin{figure}
+    \includegraphics[width=\linewidth]{figures/pca.png}
+    \caption{PCA Scatterplot}
+    \label{fig:boat1}
+  \end{figure}
 
 \subsubsection{Data Pre-processing}
 
@@ -105,7 +125,7 @@ To enhance the learning within our network, we opted for the Rectified Linear Un
 
 \subsection{Training and Testing}
 
-TWe trained our deep neural network using the backpropagation algorithm, a key method in optimizing network weights and a gradient descent variant. This algorithm aims to minimize output layer error by adjusting hidden layer weights.
+We trained our deep neural network using the backpropagation algorithm, a key method in optimizing network weights and a gradient descent variant. This algorithm aims to minimize output layer error by adjusting hidden layer weights.
 
 Training starts with a forward pass through the network, generating an initial prediction. The difference between this prediction and the actual value is calculated as an error via a loss function. Next, a backward pass computes the error derivative with respect to each weight, quantifying each weight's contribution to total error. Weights are updated to minimize error, and this process repeats until network performance plateaus or overfits.
 
@@ -124,6 +144,26 @@ This method leverages the entire dataset for training and validation, advantageo
 We used MATLAB's cvpartition function for efficient, unbiased data partitioning into training and validation sets, maximizing our data usage for model training while ensuring robust evaluation.
 
 \subsection{Results and Post-Processing}
+
+The neural network works well, a series of confusion matrixes were generated after running for the designated number of epochs. They show that the neurual netowkr is predicting the flours accuratly but not too accuratly that it is overfitting. 
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/Cm.png}
+    \caption{Confusion Matrix}
+    \label{fig:boat1}
+  \end{figure}
+
+  \begin{figure}
+    \includegraphics[width=\linewidth]{figures/DB.png}
+    \caption{Decision Boundary}
+    \label{fig:boat1}
+  \end{figure}
+
+  \begin{figure}
+    \includegraphics[width=\linewidth]{figures/roc.png}
+    \caption{Decision Boundary}
+    \label{fig:boat1}
+  \end{figure}
 
 \section{Part II: Genetic Algorithms for Global Optimization Problem}
 
