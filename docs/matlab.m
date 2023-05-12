@@ -3,6 +3,12 @@ load fisheriris
 inputs = zscore(meas); % standardize input features
 targets = categorical(species); % target labels
 
+%extract 30% of the data for testing
+cvp = cvpartition(targets, 'Holdout', 0.3);
+inputsTrain = inputs(training(cvp),:);
+targetsTrain = targets(training(cvp));
+
+
 % split into training and validation sets
 cvp = cvpartition(size(inputs,1),'Holdout',0.3);
 idxTrain = training(cvp);
