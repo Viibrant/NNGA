@@ -135,7 +135,7 @@ Our architecture also included dropout layers and batch normalization, which con
 
 \subsubsection{Cross-validation}
 
-To prevent overfitting and ensure our model generaliSes well, we used K-fold cross-validation, a robust statistical technique that assesses the model's performance on an independent dataset. We applied stratified 3-fold cross-validation on the Iris dataset, ensuring each fold represents the whole dataset's class label proportions, beneficial for imbalanced datasets.
+To prevent overfitting and ensure our model generalises well, we used K-fold cross-validation, a robust statistical technique that assesses the model's performance on an independent dataset. We applied stratified 3-fold cross-validation on the Iris dataset, ensuring each fold represents the whole dataset's class label proportions, beneficial for imbalanced datasets.
 
 This method involves dividing the dataset into 'K' subsets or 'folds', training on K-1 folds and validating on the held-out fold. Repeating this K times, each with a different validation fold, provides a reliable performance estimate on unseen data.
 
@@ -143,15 +143,17 @@ This method leverages the entire dataset for training and validation, advantageo
 
 We used MATLAB's cvpartition function for efficient, unbiased data partitioning into training and validation sets, maximizing our data usage for model training while ensuring robust evaluation.
 
-\subsection{Results and Post-Processing}
-
-The neural network works well, a series of confusion matrixes were generated after running for the designated number of epochs. They show that the neurual netowkr is predicting the flours accuratly but not too accuratly that it is overfitting. 
+Correlation matrixes were generated an compared to ensure that the data was being split evenly and that the model was not overfitting.
 
 \begin{figure}
     \includegraphics[width=\linewidth]{figures/Cm.png}
     \caption{Confusion Matrix}
     \label{fig:boat1}
   \end{figure}
+
+\subsection{Results and Post-Processing}
+
+The neural network works well, a series of confusion matrixes were generated after running for the designated number of epochs. They show that the neurual netowkr is predicting the flours accuratly but not too accuratly that it is overfitting. 
 
   \begin{figure}
     \includegraphics[width=\linewidth]{figures/DB.png}
@@ -180,7 +182,32 @@ Shubert function, demonstrating its effectiveness in managing complex optimizati
 
 \subsection{Genetic Algorithm Design}
 
+The genetic algorithm (GA) design for this study is tailored towards optimizing the SHUBERT function, a complex and non-linear optimization problem known for its multiple local minima.
+
+The SHUBERT function we used is a multivariate function defined as follows:
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/shubertdes.png}
+    \caption{Shubert Function Design}
+    \label{fig:boat1}
+  \end{figure}
+
+In our study, we utilized a Genetic Algorithm (GA) for optimizing the SHUBERT function, a notoriously complex problem due to its multivariate and non-linear nature. The GA parameters were set with a population size of 400, promoting diversity and providing a broad search space.
+
+The 'mutationadaptfeasible' and 'crossoverscattered' functions were chosen as mutation and crossover operations, respectively. The former adaptively scales the mutation based on previous success, while the latter randomly combines parent genes to produce offspring. 
+
+We ensured the best two individuals from each generation (elite count of 2) were passed into the next, preserving high-quality solutions. A stochastic selection function 'selectionstochunif' was used to maintain a uniform distribution of sampling across the population, enhancing diversity.
+
+The SHUBERT function optimization involved two variables, each ranging between -10 and 10. The GA was executed with these constraints, and the SHUBERT function served as the objective function. 
+
+
 \subsubsection{Representation of Initial Population}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/shubert.jpg}
+    \caption{Shubert Function}
+    \label{fig:boat1}
+  \end{figure}
 
 \subsubsection{Fitness Function}
 
@@ -193,9 +220,7 @@ Shubert function, demonstrating its effectiveness in managing complex optimizati
 \subsubsection{Parameters and Constraints}
 \subsection{GA Analysis of the Run}
 
-\subsubsection{Selection Strategy}
 
-\subsubsection{Comparison of Strategies}
 \subsection{Results and Discussion}
 
 \subsubsection{Premature Convergence}
