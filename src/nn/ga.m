@@ -1,3 +1,5 @@
+% Put in seperate file
+
 function y = Shubert1(x)
     n = length(x);
     sum1 = 0;
@@ -8,6 +10,8 @@ function y = Shubert1(x)
     end
     y = sum1;
   end
+
+% Put in seperate file
 
 options = optimoptions('ga', 'PopulationSize', 100, 'MutationFcn',
   'mutationadaptfeasible','CrossoverFcn', 'crossoverscattered',

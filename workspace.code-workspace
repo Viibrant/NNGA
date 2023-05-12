@@ -97,7 +97,7 @@
             },
             {
                 "name": "pdflatex",
-                "command": "pdflatex",
+                "command": "/usr/bin/pdflatex",
                 "args": [
                     "-synctex=1",
                     "-interaction=nonstopmode",
