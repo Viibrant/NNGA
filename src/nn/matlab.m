@@ -3,22 +3,17 @@ load fisheriris
 inputs = zscore(meas); % standardize input features
 targets = categorical(species); % target labels
 
-%extract 30% of the data for testing
-cvp = cvpartition(targets, 'Holdout', 0.3);
-inputsTrain = inputs(training(cvp),:);
-targetsTrain = targets(training(cvp));
+TEST_SIZE = 45;
 
+[y1, idx] = datasample(inputs, TEST_SIZE);
+
+y2 = targets(idx);
+
+inputs = removerows(inputs, "ind", idx);
+targets = removerows(targets, "ind", idx);
 
 % split into training and validation sets
-cvp = cvpartition(size(inputs,1),'Holdout',0.3);
-idxTrain = training(cvp);
-idxValidation = test(cvp);
-
-inputsTrain = inputs(idxTrain,:);
-targetsTrain = targets(idxTrain);
-
-inputsValidation = inputs(idxValidation,:);
-targetsValidation = targets(idxValidation);
+cvp = cvpartition(targets,'KFold',3,'Stratify',true);
 
 % Define the architecture of the network
 layers = [ ...
@@ -83,7 +78,6 @@ layers = [ ...
     softmaxLayer
     classificationLayer];
 
-
 % Specify the training options
 options = trainingOptions('sgdm', ...
     'MaxEpochs',500, ...
@@ -95,75 +89,84 @@ options = trainingOptions('sgdm', ...
     'Plots','training-progress');
 
 % Train the network
-net = trainNetwork(inputsTrain, targetsTrain, layers, options);
+[net, info] = trainNetwork(inputsTrain, targetsTrain, layers, options);
+
+
+for i = 1:cvp.NumTestSets
+    idxTrain = training(cvp, i);
+    idxValidation = test(cvp, i);
+
+    inputsTrain = inputs(idxTrain,:);
+    targetsTrain = targets(idxTrain);
+
+    inputsValidation = inputs(idxValidation,:);
+    targetsValidation = targets(idxValidation);
+    
+    options.ValidationData = {inputsValidation, targetsValidation};
+    
+    % Train the network
+    [net, info] = trainNetwork(inputsTrain, targetsTrain, layers, options);
 
 % Generate predictions on the validation data
 YPred = classify(net, inputsValidation);
 
+% Obtain the predicted scores (probabilities) from the trained network
+scores = predict(net, inputsValidation);
+
+
+% Convert the categorical target labels to a binary matrix
+binaryTargetsValidation = full(ind2vec(double(targetsValidation)'))';
+
+% For each class
+for i = 1:3
+    % Compute the ROC curve
+    [X,Y,T,AUC] = perfcurve(binaryTargetsValidation(:,i), scores(:,i), 1);
+
+    % Plot the ROC curve
+    plot(X, Y)
+    hold on
+end
+xlabel('False positive rate')
+ylabel('True positive rate')
+title('ROC curve')
+legend('Class 1','Class 2','Class 3','Location','Best')
+hold off
 
 % Apply PCA
-[coeff,score,latent] = pca(inputs);
+[coeff, score] = pca(inputsTrain);
 
-% Plot the first two principal components
-figure;
-scatter(score(:,1), score(:,2));
-title('PCA of Iris Dataset');
-xlabel('First Principal Component');
-ylabel('Second Principal Component');
-
-% Create a confusion matrix
-cm = confusionchart(targetsValidation, YPred);
-title('Confusion Matrix for Validation Data');
+% Transform inputsValidation to PCA space
+inputsValidationPCA = inputsValidation * coeff;
 
 % Generate a grid of points within the range of the PCA scores
-x1_range = min(inputsPCA(:,1)):0.01:max(inputsPCA(:,1));
-x2_range = min(inputsPCA(:,2)):0.01:max(inputsPCA(:,2));
+x1_range = min(score(:,1)):0.01:max(score(:,1));
+x2_range = min(score(:,2)):0.01:max(score(:,2));
 [X1, X2] = meshgrid(x1_range, x2_range);
-XGrid = [X1(:), X2(:)];
+XGridPCA = [X1(:), X2(:)];
 
-% Make predictions for each point on the grid
-YGrid = classify(netPCA, XGrid);
+% Make predictions for each point on the grid in the PCA space
+XGrid = XGridPCA * coeff(1:2,:); % transform to original space before prediction
+YGrid = classify(net, XGrid);
 
 % Convert categorical predictions to numeric for plotting
 YGridNumeric = grp2idx(YGrid);
 
 % Reshape the predicted classes into the shape of the grid
 YGridNumeric = reshape(YGridNumeric, size(X1));
+% PCA-transform the validation data
+scoreValidation = inputsValidation * coeff;
 
 % Plot the decision boundary
 figure;
 hold on;
 contourf(X1, X2, YGridNumeric);
-scatter(inputsPCA(:,1), inputsPCA(:,2), 30, grp2idx(targets), 'filled');
+scatter(scoreValidation(:,1), scoreValidation(:,2), 30, grp2idx(targetsValidation), 'filled');
 title('Decision Boundaries');
 xlabel('First Principal Component');
 ylabel('Second Principal Component');
 hold off;
 
-function [meanAccuracy, stdAccuracy] = crossValNN(inputs, targets, layers, options, k)
-    % inputs: matrix of input features
-    % targets: array of target labels
-    % layers: array of layers
-    % options: training options
-    % k: number of folds for cross-validation
-    
-    cvp = cvpartition(targets, 'KFold', k); % create cvpartition object
-    accuracies = zeros(cvp.NumTestSets, 1); % preallocate accuracies array
-    
-    for i = 1:cvp.NumTestSets
-        % Get the training and validation indices
-        trainingIdx = cvp.training(i);
-        validationIdx = cvp.test(i);
-        
-        % Train the network on the training data
-        net = trainNetwork(inputs(trainingIdx,:), targets(trainingIdx), layers, options);
-        
-        % Evaluate the network on the validation data
-        YPred = classify(net, inputs(validationIdx,:));
-        accuracies(i) = sum(YPred == targets(validationIdx)) / numel(targets(validationIdx));
-    end
-    
-    % Compute mean and standard deviation of accuracies
-    meanAccuracy = mean(accuracies);
-    stdAccuracy = std(accuracies);
+% Create a confusion matrix
+cm = confusionchart(targetsValidation, YPred);
+title('Confusion Matrix for Validation Data');
 end

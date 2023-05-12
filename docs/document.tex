@@ -118,6 +118,28 @@ sparser representations of the data, which can be beneficial for the classificat
 
 \subsection{Training and Testing}
 
+The training of our deep neural network model was executed using the backpropagation algorithm. Backpropagation is an integral method for optimising
+the weights within the network, serving as a specific implementation of a larger group of algorithms known as gradient descent algorithms. The goal
+of backpropagation is to minimize the error in the output layer by adjusting the weights in the hidden layers.
+
+The backpropagation process begins with a forward pass through the network, starting from the input layer and proceeding to the output layer. This
+stage generates an initial prediction using the current network's state. The difference between this prediction and the actual target value is then
+calculated as an error through a loss function.
+
+Subsequently, the algorithm performs a backward pass through the network. During this phase, the derivative of the error with respect to each weight
+is computed. This essentially quantifies how much each weight contributes to the total error. The weights are then updated in a direction that
+minimises the error. This procedure is repeated until the performance of the network plateaus or begins to decline, indicating a state of overfitting.
+
+In our case, the backpropagation algorithm was utilized in tandem with the stochastic gradient descent (SGD) optimization algorithm, which is renowned
+for its efficiency when handling large datasets. We also introduced a 'MaxEpochs' value of 500 and an 'InitialLearnRate' of 0.25 for the SGD, defining
+the parameters of our training process.
+
+The implementation of the backpropagation training algorithm was instrumental in effectively training our deep neural network model and achieving the
+observed performance on the Iris dataset. Balancing the learning rate and the number of epochs was a critical aspect of ensuring the model's accuracy
+and robustness.ural network could effectively learn from the Iris dataset and perform multi-class classification. Notably, the inclusion of dropout
+layers and batch normalization in the network architecture also contributed to the effective learning of the model, preventing overfitting and ensuring
+the model generalises well to unseen data.
+
 \subsubsection{Cross-validation}
 
 \subsection{Results and Post-Processing}
